@@ -46,7 +46,7 @@ class _TextFieldSearchState extends State<TextFieldSearch> {
     );
   }
 
-  Future<dynamic> bottomSheet(BuildContext context) {
+  Future<dynamic> bottomSheet(context) {
     RangeLabels labels = RangeLabels(
       values.start.toString(),
       values.end.toString(),
@@ -62,59 +62,69 @@ class _TextFieldSearchState extends State<TextFieldSearch> {
               color: const Color(0xff2F2F42),
               borderRadius: BorderRadius.circular(16),
             ),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, top: 29),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
+            child: CustomScrollView(slivers: [
+              SliverFillRemaining(
+                hasScrollBody: false,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20, right: 20, top: 29),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      IconButton(onPressed: () {}, icon: const Icon(Icons.close)),
+                      Row(
+                        children: [
+                          IconButton(
+                              onPressed: () {}, icon: const Icon(Icons.close)),
+                          const Expanded(
+                            child: Text(
+                              'Search Filter',
+                              style: Styles.textStyle18,
+                              textAlign: TextAlign.center,
+                            ),
+                          )
+                        ],
+                      ),
+                      const CustomCategorys(),
+                      const Text('price', style: Styles.textStyle16),
+                      RangeSlider(
+                        values: values,
+                        labels: labels,
+                        onChanged: (newValue) {
+                          setState(() {
+                            values = newValue;
+                          });
+                        },
+                      ),
+                      const CustomDuration(),
                       const Expanded(
-                        child: Text('Search Filter', style: Styles.textStyle18,textAlign: TextAlign.center,),)
+                          child: SizedBox(
+                        height: 18,
+                      )),
+                      const Padding(
+                        padding: EdgeInsets.only(bottom: 33.75),
+                        child: Row(
+                          children: [
+                            Expanded(
+                                flex: 1,
+                                child: CustomButton(
+                                    backgroundColor: Color(0xff858597),
+                                    textColor: Colors.white,
+                                    text: 'Clear')),
+                            SizedBox(
+                              width: 9.75,
+                            ),
+                            Expanded(
+                                child: CustomButton(
+                                    backgroundColor: Color(0xff3D5CFF),
+                                    textColor: Colors.white,
+                                    text: 'Apply Filter')),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
-                  const CustomCategorys(),
-                  const Text('price', style: Styles.textStyle16),
-                  RangeSlider(
-                    values: values,
-                    labels: labels,
-                    onChanged: (newValue) {
-                      setState(() {
-                        values = newValue;
-                      });
-                    },
-                  ),
-                  const CustomDuration(),
-                  const Expanded(
-                      child: SizedBox(
-                    height: 18,
-                  )),
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 33.75),
-                    child: Row(
-                      children: [
-                        Expanded(
-                            flex: 1,
-                            child: CustomButton(
-                                backgroundColor: Color(0xff858597),
-                                textColor: Colors.white,
-                                text: 'Clear')),
-                        SizedBox(
-                          width: 9.75,
-                        ),
-                        Expanded(
-                            flex: 3,
-                            child: CustomButton(
-                                backgroundColor: Color(0xff3D5CFF),
-                                textColor: Colors.white,
-                                text: 'Apply Filter')),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+                ),
+              )
+            ]),
           ),
         );
       },

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:simple_task_design/core/utils/styles.dart';
 
 class ChoiceChipItem extends StatefulWidget {
-  const ChoiceChipItem({super.key, required this.textLabel});
+  const ChoiceChipItem( {super.key, required this.textLabel});
   final String textLabel;
 
   @override

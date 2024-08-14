@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simple_task_design/core/utils/styles.dart';
+import 'package:simple_task_design/features/search/data/categories.dart';
 import 'package:simple_task_design/features/search/presentation/views/widget/choice_chip_item.dart';
 
 class CustomCategorys extends StatelessWidget {
@@ -7,21 +8,20 @@ class CustomCategorys extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Category',style: Styles.textStyle16),
-                        SizedBox(height: 12,),
-                        Wrap(
-                          children: [
-                            ChoiceChipItem(textLabel: 'Design'),
-                            ChoiceChipItem(textLabel: 'Painting'),
-                            ChoiceChipItem(textLabel: 'Music'),
-                            ChoiceChipItem(textLabel: 'Visual identiy'),
-                            ChoiceChipItem(textLabel: 'Mathmatics'),
-                            
-                          ],
-                        ),
+        const Text('Category', style: Styles.textStyle16),
+        const SizedBox(
+          height: 12,
+        ),
+        Wrap(
+          children: 
+          categories.map((e) {
+              return ChoiceChipItem(textLabel: e.categoryName);
+            }).toList()
+          
+        ),
       ],
     );
   }
